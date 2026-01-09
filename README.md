@@ -1,11 +1,54 @@
-<div align="center">
+# Customer Purchase Prediction Project
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+This project predicts whether a customer will make a purchase based on their profile and behavior.
 
-  <h1>Built with AI Studio</h2>
+## Project Structure
+- `notebook.ipynb`: End-to-end data science workflow.
+- `src/`: Modular Python package.
+  - `data.py`: Ingestion & splitting.
+  - `preprocess.py`: Preprocessing & Feature Engineering.
+  - `models.py`: Training & Tuning.
+  - `evaluate.py`: Metrics & SHAP explanations.
+  - `predict_api.py`: FastAPI implementation.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## How to Run
+1. **Install dependencies**: `pip install -r requirements.txt`
+2. **Train model**: Open `notebook.ipynb` and run all cells. This generates `model.joblib`.
+3. **Start the API**: `python src/predict_api.py`
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## API Usage Example
+Test the API using `curl` with the enhanced feature set:
 
-</div>
+```bash
+curl -X 'POST' \
+  'http://localhost:8000/predict' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "Age": 30,
+  "Gender": "Female",
+  "AnnualIncome": 75000,
+  "SpendingScore": 85,
+  "PreviousPurchaseCount": 2,
+  "EngagementScore": 9,
+  "LastVisitDays": 3,
+  "Country": "USA",
+  "AveragePurchaseValue": 150.50,
+  "DeviceType": "Mobile",
+  "MarketingChannel": "Social"
+}'
+```
+
+## Dataset Schema
+- `CustomerID`: Unique ID
+- `Age`: Customer age
+- `Gender`: Male/Female
+- `AnnualIncome`: Annual income in USD
+- `SpendingScore`: Normalized score (1-100)
+- `PreviousPurchaseCount`: Total past purchases
+- `EngagementScore`: (1-10)
+- `LastVisitDays`: Days since last visit
+- `Country`: Categorical
+- `AveragePurchaseValue`: Mean spend per transaction
+- `DeviceType`: Mobile, Desktop, or Tablet
+- `MarketingChannel`: Social, Email, Search, or Direct
+- `purchase`: Target variable (0 or 1)

@@ -1,0 +1,5 @@
+{
+  "name": "Customer Purchase Prediction Pipeline",
+  "description": "An end-to-end machine learning project for predicting customer purchases, featuring modular Python code, Jupyter notebook, and model explainability.",
+  "requestFramePermissions": []
+}
